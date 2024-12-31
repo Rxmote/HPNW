@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown to 2025</title>
+    
+    <!-- ใส่ลิงก์ของ Google Fonts ฟอนต์ Roboto และ Lobster -->
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        /* ทำให้ body เต็มหน้าจอและใช้ flexbox */
+        body {
+            font-family: 'Roboto', sans-serif; /* ฟอนต์หลัก */
+            margin: 0; /* เอา margin ของ body ออก */
+            height: 100vh; /* ทำให้ body มีความสูงเต็มหน้าจอ */
+            display: flex; /* ใช้ Flexbox */
+            flex-direction: column; /* วางองค์ประกอบเป็นแนวตั้ง */
+            justify-content: center; /* จัดกลางแนวนอน */
+            align-items: center; /* จัดกลางแนวตั้ง */
+            background-color: #0a030a; /* สีพื้นหลัง */
+            color: #333; /* สีตัวอักษรหลัก */
+        }
+
+        h1 {
+            font-family: 'Lobster', cursive; /* ฟอนต์หัวข้อ */
+            color: #dd6fc2; /* สีหัวข้อ */
+            font-size: 2.5em;
+            margin-bottom: 20px; /* เพิ่มระยะห่างด้านล่าง */
+        }
+
+        #countdown {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #ffffff; /* สีข้อความเคาท์ดาวน์ (แดงส้ม) */
+        }
+
+        #button {
+            display: none;
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1.5em;
+            cursor: pointer;
+            background-color: #4CAF50; /* สีพื้นหลังปุ่ม */
+            color: rgb(255, 248, 248); /* สีตัวอักษรในปุ่ม */
+            border: none;
+            border-radius: 5px;
+        }
+
+        #button:hover {
+            background-color: #45a049; /* สีพื้นหลังเมื่อ hover ปุ่ม */
+        }
+    </style>
+</head>
+<body>
+
+    <h1>เคาท์ดาวน์สู่ปี 2025 กันนน</h1>
+    <div id="countdown"></div>
+    <a href="index.html" id="button" type="button">สวัสดีปีใหม่นะครับที่รัก</a>
+    <script>
+        // ตั้งค่าวันที่และเวลาของปีใหม่ 2025
+        const targetDate = new Date("January 1, 2025 00:00:00").getTime();
+
+        // ฟังก์ชั่นเคาท์ดาวน์
+        const countdownFunction = setInterval(function() {
+            // เอาค่าเวลาปัจจุบัน
+            const now = new Date().getTime();
+
+            // คำนวณเวลาที่เหลือ
+            const distance = targetDate - now;
+
+            // คำนวณวัน ชั่วโมง นาที วินาที
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // แสดงผลเคาท์ดาวน์
+            document.getElementById("countdown").innerHTML = days + "วัน " + hours + "ชั่วโมง " + minutes + "นาที " + seconds + "วินาที ";
+
+            // ถ้าเคาท์ดาวน์ถึง 0 ให้แสดงปุ่ม
+            if (distance < 0) {
+                clearInterval(countdownFunction);
+                document.getElementById("countdown").innerHTML = "ถึงปี 2025 แล้ว!";
+                document.getElementById("button").style.display = "block";  // แสดงปุ่ม
+            }
+        }, 1000);
+    </script>
+
+</body>
+</html>
